@@ -6,8 +6,7 @@
     android:id="@+id/rlCompose"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    tools:context=".details.ComposeReviewFragment">
+    android:layout_margin="8dp">
 
     <Button
         android:id="@+id/btnAddProfilePhoto"
