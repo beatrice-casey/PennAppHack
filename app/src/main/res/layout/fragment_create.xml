@@ -9,24 +9,14 @@
     android:layout_margin="8dp">
 
     <Button
-        android:id="@+id/btnAddProfilePhoto"
+        android:id="@+id/btnFood"
         android:layout_width="wrap_content"
         android:layout_height="59dp"
-        android:layout_above="@id/rbCompose"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="5dp"
         android:text="Add a Photo" />
 
-    <RatingBar
-        android:id="@+id/rbCompose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="125dp" />
 
     <EditText
         android:id="@+id/etDescription"
@@ -36,12 +26,12 @@
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="4dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Ingredients and Steps"
         android:inputType="textMultiLine" />
-
 
     <Button
         android:id="@+id/btnPost"
@@ -54,16 +44,43 @@
         android:text="Post" />
 
     <ImageView
-        android:id="@+id/ivReviewImage"
+        android:id="@+id/foodPicture"
         android:layout_width="wrap_content"
         android:layout_height="66dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="313dp"
-        android:layout_marginBottom="137dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="254dp"
         tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        tools:text="Recipe Name" />
+
+    <Spinner
+        android:id="@+id/timeDrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="211dp" />
+
+    <Spinner
+        android:id="@+id/priceDrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="155dp" />
 
 </RelativeLayout>
