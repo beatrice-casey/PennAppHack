@@ -17,5 +17,5 @@
             android:padding="8dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    
+
 </FrameLayout>

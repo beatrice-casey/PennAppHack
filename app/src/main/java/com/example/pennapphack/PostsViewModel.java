@@ -79,7 +79,7 @@ public class PostsViewModel extends AndroidViewModel {
                 }
                 int i;
                 for (i = 0; i < postResults.size(); i++) {
-                    if (postResults.get(i).getTime() >= timePref) {
+                    if (postResults.get(i).getTime() > timePref) {
                         postResults.remove(i);
 
                     }
