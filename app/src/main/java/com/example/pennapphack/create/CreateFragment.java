@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -111,6 +112,8 @@ public class CreateFragment extends Fragment {
         recipeName = view.findViewById(R.id.recipeName);
         timeSpin = view.findViewById(R.id.timeDrop);
         priceSpin = view.findViewById(R.id.priceDrop);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         //time spinner
         ArrayAdapter<String> arrayAdapterTime= new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, TIMELIST);

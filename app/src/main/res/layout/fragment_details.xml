@@ -25,8 +25,7 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:backgroundTint="@android:color/transparent"
-        app:icon="@drawable/ic_baseline_favorite_border_24" />
+        android:backgroundTint="@android:color/transparent" />
 
     <TextView
         android:id="@+id/tvUsername"
@@ -48,7 +47,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="123dp"
         android:layout_toStartOf="@+id/ivFoodImage"
         tools:text="Detailed recipe" />
 
@@ -158,13 +156,13 @@
     <RatingBar
         android:id="@+id/rbPrice"
         style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
+        android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvRecipe"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="205dp"
+        android:layout_marginEnd="183dp"
         android:layout_toEndOf="@+id/tvPriceText"
         android:numStars="3" />
 
@@ -175,7 +173,7 @@
         android:layout_below="@+id/tvRecipe"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="132dp"
+        android:layout_marginEnd="123dp"
         android:text="Access: " />
 
     <TextView
@@ -185,7 +183,7 @@
         android:layout_below="@+id/tvRecipe"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="66dp"
+        android:layout_marginEnd="53dp"
         tools:text="Full/Dorm" />
 
 </RelativeLayout>

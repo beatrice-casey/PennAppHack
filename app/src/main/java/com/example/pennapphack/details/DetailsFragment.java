@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.pennapphack.R;
 import com.example.pennapphack.models.Post;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -77,36 +79,43 @@ public class DetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         tvRecipeName = view.findViewById(R.id.tvRecipeName);
-        tvRecipeName.setText(post.getRecipeName());
-
         tvRecipe = view.findViewById(R.id.tvRecipe);
-        tvRecipe.setText(post.getRecipe());
-
         btnFavorites = view.findViewById(R.id.btnFavorites);
         ivFoodImage = view.findViewById(R.id.ivFoodImage);
-
         tvUsername = view.findViewById(R.id.tvUsername);
-        tvUsername.setText(post.getUser().getUsername());
-
         tvReviews = view.findViewById(R.id.tvReviewTag);
         btnCreateReview = view.findViewById(R.id.btnAddReview);
         rvReviews = view.findViewById(R.id.rvReviews);
         ratingBar = view.findViewById(R.id.rbDetails);
         tvTimeText = view.findViewById(R.id.tvTimeText);
         tvTime = view.findViewById(R.id.tvTime);
-        tvTime.setText(post.getTime());
 
         tvPriceText = view.findViewById(R.id.tvPriceText);
         rbPrice = view.findViewById(R.id.rbPrice);
-        rbPrice.setRating(post.getPrice());
         tvAccess = view.findViewById(R.id.tvAccess);
         tvAccessType = view.findViewById(R.id.tvAccessType);
+
+
         if (post.getAccess() == 0) {
             tvAccessType.setText("Dorm");
 
         } else {
             tvAccessType.setText("Full Kitchen");
         }
+
+        tvRecipeName.setText(post.getRecipeName());
+        tvRecipe.setText(post.getRecipe());
+        tvUsername.setText(post.getUser().getUsername());
+
+        tvTime.setText(String.valueOf(post.getTime()));
+        rbPrice.setRating(post.getPrice());
+
+        ParseFile image = post.getImage();
+        if (image != null) {
+            Glide.with(context).load(post.getImage().getUrl()).into(ivFoodImage);
+        }
+
+        btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
 
     }
 }

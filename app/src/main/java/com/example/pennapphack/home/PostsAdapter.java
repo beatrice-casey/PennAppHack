@@ -20,6 +20,8 @@ import com.example.pennapphack.R;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -92,6 +94,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             }
+            btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
 
         }
 
@@ -107,7 +110,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 //make an intent to display MovieDetailsActivity
                 Intent intent = new Intent(context, PostDetailsActivity.class);
                 //serialize the movie using parceler, use short name as key
-                intent.putExtra("post", post);
+                intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
                 //show the activity
                 context.startActivity(intent);
             }
