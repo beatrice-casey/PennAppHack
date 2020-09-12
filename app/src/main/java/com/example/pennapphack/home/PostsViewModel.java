@@ -68,7 +68,7 @@ public class PostsViewModel extends AndroidViewModel {
         //get the user who made the post
         query.include(Post.KEY_USER);
         //query.whereEqualTo(Post.KEY_PRICE, pricePref);
-        //query.whereEqualTo(Post.KEY_ACCESS, accessPref);
+        query.whereEqualTo(Post.KEY_ACCESS, accessPref);
         query.addDescendingOrder(Post.KEY_CREATED);
         //get the preferred time
 
