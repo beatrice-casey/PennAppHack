@@ -88,7 +88,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             //bind data into view elements
             tvRecipeName.setText(post.getRecipeName());
             tvUsername.setText(post.getUser().getUsername());
-            tvTime.setText(post.getTime());
+            int time = post.getTime();
+            tvTime.setText(String.valueOf(time));
             ratingBar.setNumStars(post.getPrice());
             ParseFile image = post.getImage();
             if (image != null) {
