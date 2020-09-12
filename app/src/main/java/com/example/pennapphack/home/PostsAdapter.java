@@ -68,7 +68,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected TextView tvUsername;
         private ImageView ivImage;
         private TextView tvRecipeName;
