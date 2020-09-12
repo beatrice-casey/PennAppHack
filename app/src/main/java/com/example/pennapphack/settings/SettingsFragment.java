@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.pennapphack.R;
 import com.example.pennapphack.login.LoginActivity;
@@ -19,8 +21,20 @@ import com.parse.ParseUser;
 
 public class SettingsFragment extends Fragment {
 
-    private Button btnLogout;
+    String [] TIMELIST ={"30","60","90","120"};
+    String [] PRICELIST ={"$","$$","$$$"};
+    String [] ACCESSLIST ={"Dorm Room", "Full Kitchen"};
 
+    private Button btnLogout;
+    private TextView selectPref;
+    private Spinner timeSpin;
+    private Spinner priceSpin;
+    private Spinner accessSpin;
+    private Button setPref;
+    private TextView change;
+    private Spinner timeSpinner;
+    private Spinner priceSpinner;
+    private Spinner accessSpinner;
 
     public SettingsFragment() {
         // Required empty public constructor
