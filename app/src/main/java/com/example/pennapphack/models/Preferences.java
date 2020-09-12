@@ -11,7 +11,7 @@ public class Preferences extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_PRICE = "price";
     public static final String KEY_TIME = "time";
-    public static final String KEY_ACCESS = "accessibility";
+    public static final String KEY_ACCESS = "access";
 
 
     public ParseUser getUser() {

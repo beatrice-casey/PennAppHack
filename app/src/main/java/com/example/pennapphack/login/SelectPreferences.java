@@ -91,8 +91,13 @@ public class SelectPreferences extends AppCompatActivity {
         int price = priceString.length();
         preferences.setPrice(price);
 
-        int access = accessSpinner.getSelectedItemPosition();
-        preferences.setAccess(access);
+        String accessString = accessSpinner.getSelectedItem().toString();
+        if (accessString.compareTo("Dorm") != 0) {
+            preferences.setAccess(1);
+        } else {
+            preferences.setAccess(0);
+        }
+
 
         preferences.setUser(ParseUser.getCurrentUser());
 

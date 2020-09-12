@@ -19,6 +19,7 @@
         android:text="Logout" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -70,13 +71,13 @@
         android:id="@+id/btnSetPreferences"
         style="?attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/null"
+        android:layout_height="63dp"
+        android:layout_below="@+id/linearLayout"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="442dp"
+        android:layout_marginBottom="438dp"
         android:text="Set Preferences" />
 </RelativeLayout>

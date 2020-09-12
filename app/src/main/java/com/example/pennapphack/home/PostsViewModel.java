@@ -52,6 +52,7 @@ public class PostsViewModel extends AndroidViewModel {
                 }
                 timePref = preferences.get(0).getTime();
                 accessPref = preferences.get(0).getAccess();
+                Log.i(TAG, "accessPref is: " + accessPref);
                 pricePref = preferences.get(0).getPrice();
 
 
