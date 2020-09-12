@@ -31,7 +31,7 @@ And what if you are really craving something specific and just need the recipe t
 Finally we have the users personal page. On this page we display the users profile name and then two separate threads. One being their personal creations and the other being their
   saved recipes. This way they can always go back to anything they have made or that they like without having to go and search for their own creations. Lastly the personal page
   also contains the setting icon which when clicked on will take the user to the settings page.
-Within the settings page the user has the ability to change almost everything about them on the app. They can change their username, password and all their preferences. We made
+Within the settings page the user has the ability to change almost everything about them on the app. They can change all their preferences. We made
   this possible because everyone always has fluctuating situations and this allows for the most versatile user experience. Of course if the user changes/updates their preferences
   the application will change and adapt to their new preferences, completely changing their home thread of recipes but never changing their personal page. Lastly, the user has the 
   option to log out of the application with the click of a button.
