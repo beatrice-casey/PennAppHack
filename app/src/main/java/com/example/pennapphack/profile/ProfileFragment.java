@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pennapphack.R;
+import com.example.pennapphack.models.Favorite;
 import com.example.pennapphack.models.Post;
-import com.example.pennapphack.models.Review;
 import com.example.pennapphack.settings.SettingsFragment;
 import com.parse.ParseUser;
 
@@ -42,10 +42,13 @@ public class ProfileFragment extends Fragment {
     private TextView savedPosts;
     private RecyclerView savedList;
     private ProfileViewModel mViewModel;
+    private FavoritesViewModel favoritesViewModel;
     private LinearLayoutManager linearLayoutManager;
-    private Post post;
+    private LinearLayoutManager linearLayoutManager2;
+    private List<Favorite> favorites;
 
     protected ProfileAdapter adapter;
+    protected FavoritesAdapter adapter2;
     protected List<Post> posts;
 
     public ProfileFragment() {
@@ -56,6 +59,7 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProviders().of(this).get(ProfileViewModel.class);
+        favoritesViewModel = new ViewModelProviders().of(this).get(FavoritesViewModel.class);
 
     }
 
@@ -79,11 +83,17 @@ public class ProfileFragment extends Fragment {
         savedList = view.findViewById(R.id.saveList);
 
         posts = new ArrayList<>();
+        favorites = new ArrayList<>();
         adapter = new ProfileAdapter(getContext(), posts);
+        adapter2 = new FavoritesAdapter(getContext(), favorites);
         linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager2 = new LinearLayoutManager(getContext());
 
         userList.setAdapter(adapter);
         userList.setLayoutManager(linearLayoutManager);
+
+        savedList.setAdapter(adapter2);
+        savedList.setLayoutManager(linearLayoutManager2);
 
         mViewModel.getPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
             @Override
@@ -91,6 +101,18 @@ public class ProfileFragment extends Fragment {
                 // update UI
                 if (!reviewsResults.isEmpty()) {
                     adapter.setPosts(reviewsResults);
+                }
+
+
+            }
+        });
+
+        favoritesViewModel.getFavorites().observe(getViewLifecycleOwner(), new Observer<List<Favorite>>() {
+            @Override
+            public void onChanged(List<Favorite> reviewsResults) {
+                // update UI
+                if (!reviewsResults.isEmpty()) {
+                    adapter2.setFavorites(reviewsResults);
                 }
 
 

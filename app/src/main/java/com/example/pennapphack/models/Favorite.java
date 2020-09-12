@@ -28,7 +28,7 @@ public class Favorite extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public ParseObject getPost() { return getParseObject(KEY_POST);}
+    public Post getPost() { return (Post) get(KEY_POST);}
 
     public void setPost(ParseObject post) { put(KEY_POST, post); }
 
