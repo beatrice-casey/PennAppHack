@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.pennapphack.details.PostDetailsActivity;
 import com.example.pennapphack.models.Post;
 import com.example.pennapphack.R;
 import com.parse.ParseFile;
