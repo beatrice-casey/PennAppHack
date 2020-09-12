@@ -1,57 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:visibility="visible">
 
+
+
+    <TextView
+        android:id="@+id/tvRecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="7dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Recipe Name" />
+
+    <Button
+        android:id="@+id/btnFavorites"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/tvRecipeName"
+        android:backgroundTint="@android:color/transparent" />
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="beatrice" />
+        android:layout_below="@+id/tvRecipeName"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="54dp"
+        tools:text="username" />
 
-    <TextView
-        android:id="@+id/tvDescription"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        tools:text="dogs are cute!" />
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvUsername">
+
+        <TextView
+            android:id="@+id/tvTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+
+            android:text="Time (minutes): " />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            tools:text="30" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:max="3"
+            android:numStars="3" />
+
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="232dp"
-        android:layout_height="182dp"
-        android:scaleType="centerCrop"
+        android:layout_width="50dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
         tools:srcCompat="@tools:sample/avatars" />
 
 
 
-
-    <TextView
-        android:id="@+id/tvTimestamp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="8m" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnLike"
-            android:layout_width="24dp"
-            android:layout_height="22dp"
-            />
+</RelativeLayout>
 
 
-    </LinearLayout>
-</LinearLayout>
+
+
+
+
+

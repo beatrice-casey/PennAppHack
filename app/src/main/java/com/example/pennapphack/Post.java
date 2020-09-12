@@ -14,6 +14,7 @@ public class Post extends ParseObject {
     public static final String KEY_CREATED = "createdAt";
     public static final String KEY_PRICE = "price";
     public static final String KEY_TIME = "time";
+    public static final String KEY_ACCESS = "access";
 
     public String getRecipeName() {
         return getString(KEY_RECIPE_NAME);
@@ -46,5 +47,9 @@ public class Post extends ParseObject {
     public int getTime() {return getInt(KEY_TIME);}
 
     public void setTime(int time) {put(KEY_TIME, time);}
+
+    public int getAccess() { return getInt(KEY_ACCESS); }
+
+    public void setAccess(int access) { put(KEY_ACCESS, access); }
 
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,11 +56,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return posts.size();
     }
 
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvUsername;
         private ImageView ivImage;
-        private TextView tvDescription;
-        private TextView tvTimestamp;
+        private TextView tvRecipeName;
+        private TextView tvTimeText;
+        private TextView tvTime;
+        private RatingBar ratingBar;
         private Button btnLike;
         final ParseUser currentUser;
 
@@ -67,18 +75,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
+            tvRecipeName = itemView.findViewById(R.id.tvRecipeName);
+            btnLike = itemView.findViewById(R.id.btnFavorites);
+            tvTimeText = itemView.findViewById(R.id.tvTimeText);
+            tvTime = itemView.findViewById(R.id.tvTime);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
             currentUser = ParseUser.getCurrentUser();
             itemView.setOnClickListener(this);
         }
 
         public void bind(final Post post) {
             //bind data into view elements
-            tvDescription.setText(post.getDescription());
+            tvRecipeName.setText(post.getRecipeName());
             tvUsername.setText(post.getUser().getUsername());
-            tvTimestamp.setText(DateUtils.getRelativeTimeSpanString(post.getCreatedAt().getTime(),
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString());
+            tvTime.setText(post.getTime());
+            ratingBar.setNumStars(post.getPrice());
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
