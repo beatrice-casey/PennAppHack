@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,7 @@ public class DetailsFragment extends Fragment {
     private TextView tvAccessType;
     protected ReviewsAdapter adapter;
     private List<Review> reviews;
+    private TextView tvEmptyReviewsNote;
 
     private ReviewsViewModel mViewModel;
     LinearLayoutManager linearLayoutManager;
@@ -101,6 +103,7 @@ public class DetailsFragment extends Fragment {
         ratingBar = view.findViewById(R.id.rbDetails);
         tvTimeText = view.findViewById(R.id.tvTimeText);
         tvTime = view.findViewById(R.id.tvTime);
+        tvEmptyReviewsNote = view.findViewById(R.id.tvEmptyTextNote);
 
         tvPriceText = view.findViewById(R.id.tvPriceText);
         rbPrice = view.findViewById(R.id.rbPrice);
@@ -144,6 +147,20 @@ public class DetailsFragment extends Fragment {
         reviews = new ArrayList<>();
         adapter = new ReviewsAdapter(getContext(), reviews);
         rvReviews.setAdapter(adapter);
+
+        mViewModel.getReviews(post).observe(getViewLifecycleOwner(), new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviewsResults) {
+                // update UI
+
+                tvEmptyReviewsNote.setText("");
+                adapter.setReviews(reviewsResults);
+                rating = adapter.getRating(reviewsResults);
+                ratingBar.setRating(rating);
+
+
+            }
+        });
 
     }
 
