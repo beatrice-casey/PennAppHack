@@ -28,7 +28,7 @@ And what if you are really craving something specific and just need the recipe t
   the page will come up with a list of recipes matching recipe title you entered. From there the page acts as the original home screen, keep scrolling for as long as you want
   and then once you come upon a recipe you like, give it a click and go to work!
 
-Finally we have the users persoanl page. On this page we display the users profile name and then two separate threads. One being their personal creations and the other being their 
+Finally we have the users personal page. On this page we display the users profile name and then two separate threads. One being their personal creations and the other being their
   saved recipes. This way they can always go back to anything they have made or that they like without having to go and search for their own creations. Lastly the personal page
   also contains the setting icon which when clicked on will take the user to the settings page.
 Within the settings page the user has the ability to change almost everything about them on the app. They can change their username, password and all their preferences. We made
