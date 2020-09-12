@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.pennapphack.home.MainActivity;
+import com.example.pennapphack.models.Preferences;
+import com.example.pennapphack.R;
 import com.google.android.material.card.MaterialCardView;
 import com.parse.ParseException;
 import com.parse.ParseUser;

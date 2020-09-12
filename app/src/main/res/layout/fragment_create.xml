@@ -56,31 +56,47 @@
         android:layout_marginBottom="254dp"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
+    <EditText
         android:id="@+id/recipeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="32dp"
+        android:layout_toEndOf="@+id/tvRecipeNameText"
+        android:textSize="20sp"
         tools:text="Recipe Name" />
 
     <Spinner
         android:id="@+id/timeDrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/etDescription"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="211dp" />
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="196dp" />
 
     <Spinner
         android:id="@+id/priceDrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="41dp"
+        android:layout_below="@+id/etDescription"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="155dp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginBottom="137dp" />
+
+    <TextView
+        android:id="@+id/tvRecipeNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="43dp"
+        android:text="Recipe Name: "
+        android:textSize="20sp" />
 
 </RelativeLayout>

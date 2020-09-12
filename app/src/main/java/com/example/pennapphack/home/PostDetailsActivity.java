@@ -1,8 +1,10 @@
-package com.example.pennapphack;
+package com.example.pennapphack.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.pennapphack.R;
 
 public class PostDetailsActivity extends AppCompatActivity {
 

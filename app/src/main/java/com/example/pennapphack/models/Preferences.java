@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.models;
 
 
 import com.parse.ParseClassName;

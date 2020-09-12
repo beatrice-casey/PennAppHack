@@ -1,9 +1,7 @@
-package com.example.pennapphack;
+package com.example.pennapphack.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.parse.FindCallback;
-import com.parse.ParseException;
+import com.example.pennapphack.models.Post;
+import com.example.pennapphack.R;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -90,7 +86,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvUsername.setText(post.getUser().getUsername());
             int time = post.getTime();
             tvTime.setText(String.valueOf(time));
-            ratingBar.setNumStars(post.getPrice());
+            ratingBar.setRating(post.getPrice());
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);

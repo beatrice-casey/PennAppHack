@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -15,6 +15,7 @@ public class Post extends ParseObject {
     public static final String KEY_PRICE = "price";
     public static final String KEY_TIME = "time";
     public static final String KEY_ACCESS = "access";
+    public static final String KEY_RECIPE = "recipe";
 
     public String getRecipeName() {
         return getString(KEY_RECIPE_NAME);
@@ -51,5 +52,9 @@ public class Post extends ParseObject {
     public int getAccess() { return getInt(KEY_ACCESS); }
 
     public void setAccess(int access) { put(KEY_ACCESS, access); }
+
+    public String getRecipe() { return getString(KEY_RECIPE); }
+
+    public void setRecipe(String recipe) { put(KEY_RECIPE, recipe); }
 
 }

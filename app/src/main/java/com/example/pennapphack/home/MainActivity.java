@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.pennapphack.create.CreateFragment;
+import com.example.pennapphack.profile.ProfileFragment;
+import com.example.pennapphack.R;
+import com.example.pennapphack.search.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.home;
 
 import android.os.Bundle;
 
@@ -14,6 +14,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.pennapphack.models.Post;
+import com.example.pennapphack.R;
 
 import java.util.ArrayList;
 import java.util.List;

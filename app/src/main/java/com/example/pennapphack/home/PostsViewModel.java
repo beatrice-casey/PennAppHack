@@ -1,4 +1,4 @@
-package com.example.pennapphack;
+package com.example.pennapphack.home;
 
 import android.app.Application;
 import android.util.Log;
@@ -8,6 +8,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.pennapphack.models.Post;
+import com.example.pennapphack.models.Preferences;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

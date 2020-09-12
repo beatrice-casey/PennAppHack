@@ -3,11 +3,10 @@ package com.example.pennapphack;
 
 import android.app.Application;
 
+import com.example.pennapphack.models.Post;
+import com.example.pennapphack.models.Preferences;
 import com.parse.Parse;
 import com.parse.ParseObject;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ParseApplication extends Application {
     @Override
