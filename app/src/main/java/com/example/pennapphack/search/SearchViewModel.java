@@ -66,6 +66,7 @@ public class SearchViewModel extends AndroidViewModel {
                 for (i = 0; i < postResults.size(); i++) {
                     if (postResults.get(i).getRecipeName().toLowerCase().compareTo(recipe.toLowerCase())!= 0) {
                         postResults.remove(i);
+                        i--;
                     }
                 }
                 listPosts.addAll(postResults);
