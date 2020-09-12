@@ -15,11 +15,11 @@ public class Post extends ParseObject {
     public static final String KEY_PRICE = "price";
     public static final String KEY_TIME = "time";
 
-    public String getDescription() {
+    public String getRecipeName() {
         return getString(KEY_RECIPE_NAME);
     }
 
-    public void setDescription(String description) {
+    public void setRecipeName(String description) {
         put(KEY_RECIPE_NAME, description);
     }
 
