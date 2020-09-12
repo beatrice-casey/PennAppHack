@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.pennapphack.R;
+import com.example.pennapphack.models.Favorite;
 import com.example.pennapphack.models.Post;
 import com.example.pennapphack.models.Review;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +42,7 @@ public class DetailsFragment extends Fragment {
 
     Context context;
     Post post;
+    public static final String TAG = "DetailsFragment";
 
     private TextView tvRecipeName;
     private TextView tvRecipe;
@@ -54,6 +62,7 @@ public class DetailsFragment extends Fragment {
     protected ReviewsAdapter adapter;
     private List<Review> reviews;
     private TextView tvEmptyReviewsNote;
+    private boolean isLiked;
 
     private ReviewsViewModel mViewModel;
     LinearLayoutManager linearLayoutManager;
@@ -130,7 +139,20 @@ public class DetailsFragment extends Fragment {
             Glide.with(context).load(post.getImage().getUrl()).into(ivFoodImage);
         }
 
-        btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+        checkFavorite(post);
+
+        btnFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isLiked) {
+                    btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                    addFavorite(post);
+                } else {
+                    btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                    removeFavorite(post);
+                }
+            }
+        });
 
         btnCreateReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,5 +192,61 @@ public class DetailsFragment extends Fragment {
         transaction.replace(R.id.flContainerReview, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void checkFavorite(Post post) {
+        ParseQuery<Favorite> query = ParseQuery.getQuery(Favorite.class);
+        query.whereEqualTo(Favorite.KEY_POST, post);
+        query.whereEqualTo(Favorite.KEY_USER, ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<Favorite>() {
+            @Override
+            public void done(List<Favorite> favorites, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+                if (favorites.isEmpty()) {
+                    btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                    isLiked = false;
+                } else {
+                    btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                    isLiked = true;
+                }
+
+
+            }
+        });
+    }
+
+
+    private void removeFavorite(Post post) {
+        ParseQuery<Favorite> query = ParseQuery.getQuery(Favorite.class);
+        query.whereEqualTo(Favorite.KEY_POST, post);
+        query.whereEqualTo(Favorite.KEY_USER, ParseUser.getCurrentUser());
+        query.getFirstInBackground(new GetCallback<Favorite>() {
+
+            @Override
+            public void done(Favorite object, ParseException e) {
+                try {
+                    object.delete();
+                    object.saveInBackground();
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        isLiked = false;
+    }
+
+
+    private void addFavorite(Post post) {
+        Favorite favorite = new Favorite();
+        favorite.setPost(post);
+        favorite.setRecipeName(post.getRecipeName());
+        favorite.setUser(ParseUser.getCurrentUser());
+        favorite.saveInBackground();
+        isLiked = true;
+
     }
 }
