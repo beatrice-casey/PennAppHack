@@ -2,6 +2,7 @@ package com.example.pennapphack.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.pennapphack.details.PostDetailsActivity;
+import com.example.pennapphack.models.Favorite;
 import com.example.pennapphack.models.Post;
 import com.example.pennapphack.R;
+import com.example.pennapphack.models.Preferences;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -69,6 +77,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private RatingBar ratingBar;
         private Button btnLike;
         final ParseUser currentUser;
+        private boolean isLiked;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +90,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ratingBar = itemView.findViewById(R.id.ratingBar);
             currentUser = ParseUser.getCurrentUser();
             itemView.setOnClickListener(this);
+
+            btnLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!isLiked) {
+                        btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        addFavorite(posts.get(getAdapterPosition())); 
+                    } else {
+                        btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        removeFavorite(posts.get(getAdapterPosition()));
+                    }
+                   
+                }
+            });
         }
 
         public void bind(final Post post) {
@@ -94,8 +117,32 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (image != null) {
                 Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             }
-            btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+            checkFavorite(post);
 
+        }
+        
+        private void checkFavorite(Post post) {
+            ParseQuery<Favorite> query = ParseQuery.getQuery(Favorite.class);
+            query.whereEqualTo(Favorite.KEY_POST, post);
+            query.whereEqualTo(Favorite.KEY_USER, ParseUser.getCurrentUser());
+            query.findInBackground(new FindCallback<Favorite>() {
+                @Override
+                public void done(List<Favorite> favorites, ParseException e) {
+                    if (e != null) {
+                        Log.e(TAG, "Issue with getting posts", e);
+                        return;
+                    }
+                    if (favorites.isEmpty()) {
+                        btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
+                        isLiked = false;
+                    } else {
+                        btnLike.setBackgroundResource(R.drawable.ic_baseline_favorite_24);
+                        isLiked = true;
+                    }
+
+
+                }
+            });
         }
 
 
@@ -117,6 +164,38 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         }
 
     }
+
+    private void removeFavorite(Post post) {
+        ParseQuery<Favorite> query = ParseQuery.getQuery(Favorite.class);
+        query.whereEqualTo(Favorite.KEY_POST, post);
+        query.whereEqualTo(Favorite.KEY_USER, ParseUser.getCurrentUser());
+        query.getFirstInBackground(new GetCallback<Favorite>() {
+
+            @Override
+            public void done(Favorite object, ParseException e) {
+                try {
+                    object.delete();
+                    object.saveInBackground();
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+        isLiked = false;
+    }
+
+
+    private void addFavorite(Post post) {
+        Favorite favorite = new Favorite();
+        favorite.setPost(post);
+        favorite.setRecipeName(post.getRecipeName());
+        favorite.setUser(ParseUser.getCurrentUser());
+        favorite.saveInBackground();
+        isLiked = true;
+
+    }
+
     // Clean all elements of the recycler
     public void clear() {
         posts.clear();
