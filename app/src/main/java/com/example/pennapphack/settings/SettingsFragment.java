@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pennapphack.R;
 import com.example.pennapphack.login.LoginActivity;
+import com.example.pennapphack.models.Preferences;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
 
 
 public class SettingsFragment extends Fragment {
@@ -36,6 +46,10 @@ public class SettingsFragment extends Fragment {
     private Spinner timeSpinner;
     private Spinner priceSpinner;
     private Spinner accessSpinner;
+    private ArrayAdapter<String> arrayAdapterTime;
+    private ArrayAdapter<String> arrayAdapterPrice;
+    private ArrayAdapter<String> arrayAdapterAccess;
+    private String preferencesObjectID;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -68,20 +82,21 @@ public class SettingsFragment extends Fragment {
         change=view.findViewById(R.id.tvChangePreferences);
 
         //time spinner
-        ArrayAdapter<String> arrayAdapterTime= new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, TIMELIST);
+        arrayAdapterTime= new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, TIMELIST);
         timeSpinner = (Spinner)timeSpin;
         timeSpinner.setAdapter(arrayAdapterTime);
 
         //price spinner
-        ArrayAdapter<String> arrayAdapterPrice = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, PRICELIST);
+        arrayAdapterPrice = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, PRICELIST);
         priceSpinner = (Spinner)priceSpin;
         priceSpinner.setAdapter(arrayAdapterPrice);
 
         //access spinner
-        ArrayAdapter<String> arrayAdapterAccess = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, ACCESSLIST);
+        arrayAdapterAccess = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line, ACCESSLIST);
         accessSpinner = (Spinner)accessSpin;
         accessSpinner.setAdapter(arrayAdapterAccess);
 
+        showSelectedPreferences();
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +110,68 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        setPref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePreferences();
+            }
+        });
+    }
+
+    private void showSelectedPreferences(){
+        ParseQuery<Preferences> query = ParseQuery.getQuery(Preferences.class);
+        query.include(Preferences.KEY_USER);
+        query.whereEqualTo(Preferences.KEY_USER,ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<Preferences>() {
+            @Override
+            public void done(List<Preferences> objects, ParseException e) {
+                String time = Integer.toString(objects.get(0).getTime());
+
+                int spinnerPositionTime = arrayAdapterTime.getPosition(time);
+
+                timeSpinner.setSelection(spinnerPositionTime);
+                priceSpinner.setSelection(objects.get(0).getPrice()-1);
+                accessSpinner.setSelection(objects.get(0).getAccess());
+
+                preferencesObjectID = objects.get(0).getObjectId();
+            }
+        });
+    }
+
+    private void updatePreferences() {
+        ParseQuery<Preferences> query = ParseQuery.getQuery(Preferences.class);
+        query.whereEqualTo(Preferences.KEY_USER, ParseUser.getCurrentUser());
+        query.getInBackground(preferencesObjectID, new GetCallback<Preferences>() {
+            @Override
+            public void done(Preferences object, ParseException e) {
+                String timeString = timeSpinner.getSelectedItem().toString();
+                int time = Integer.parseInt(timeString);
+                object.setTime(time);
+
+                String priceString = priceSpinner.getSelectedItem().toString();
+                int price = priceString.length();
+                object.setPrice(price);
+
+                String accessString = accessSpinner.getSelectedItem().toString();
+                if (accessString.compareTo("Dorm") != 0) {
+                    object.setAccess(1);
+                } else {
+                    object.setAccess(0);
+                }
+
+                object.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null) {
+                            Log.e("PreferenceUpdate", "Issue updating preferences", e);
+                            return;
+                        }
+                        Toast.makeText(getContext(), "Preferences Updated.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
 
     }
 }
