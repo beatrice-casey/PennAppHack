@@ -119,20 +119,21 @@ public class DetailsFragment extends Fragment {
         tvAccess = view.findViewById(R.id.tvAccess);
         tvAccessType = view.findViewById(R.id.tvAccessType);
 
-
-        if (post.getAccess() == 0) {
-            tvAccessType.setText("Dorm");
-
-        } else {
-            tvAccessType.setText("Full Kitchen");
-        }
-
         tvRecipeName.setText(post.getRecipeName());
         tvRecipe.setText(post.getRecipe());
         tvUsername.setText(post.getUser().getUsername());
 
         tvTime.setText(String.valueOf(post.getTime()));
         rbPrice.setRating(post.getPrice());
+
+        Log.i(TAG, "The access number is: " + post.getAccess());
+        if (post.getAccess() == 0) {
+            tvAccessType.setText("Dorm");
+
+        } else if (post.getAccess() == 1) {
+            tvAccessType.setText("Full Kitchen");
+        }
+
 
         ParseFile image = post.getImage();
         if (image != null) {

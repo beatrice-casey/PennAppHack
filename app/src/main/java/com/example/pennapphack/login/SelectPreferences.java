@@ -92,7 +92,7 @@ public class SelectPreferences extends AppCompatActivity {
         preferences.setPrice(price);
 
         String accessString = accessSpinner.getSelectedItem().toString();
-        if (accessString.compareTo("Dorm") != 0) {
+        if (accessString.compareTo("Dorm Room") != 0) {
             preferences.setAccess(1);
         } else {
             preferences.setAccess(0);
