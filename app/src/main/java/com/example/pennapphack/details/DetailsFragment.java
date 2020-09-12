@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -19,9 +22,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.pennapphack.R;
 import com.example.pennapphack.models.Post;
+import com.example.pennapphack.models.Review;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,6 +50,11 @@ public class DetailsFragment extends Fragment {
     private RatingBar rbPrice;
     private TextView tvAccess;
     private TextView tvAccessType;
+    protected ReviewsAdapter adapter;
+    private List<Review> reviews;
+
+    private ReviewsViewModel mViewModel;
+    LinearLayoutManager linearLayoutManager;
 
 
     //protected ReviewsAdapter adapter;
@@ -64,7 +74,9 @@ public class DetailsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProviders().of(this).get(ReviewsViewModel.class);
     }
 
     @Override
@@ -117,5 +129,29 @@ public class DetailsFragment extends Fragment {
 
         btnFavorites.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24);
 
+        btnCreateReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ComposeReviewFragment(post);
+                replaceFragment(fragment);
+
+            }
+        });
+
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rvReviews.setLayoutManager(linearLayoutManager);
+
+        reviews = new ArrayList<>();
+        adapter = new ReviewsAdapter(getContext(), reviews);
+        rvReviews.setAdapter(adapter);
+
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.replace(R.id.flContainerReview, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

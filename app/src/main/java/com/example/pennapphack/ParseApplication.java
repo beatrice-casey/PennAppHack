@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.example.pennapphack.models.Post;
 import com.example.pennapphack.models.Preferences;
+import com.example.pennapphack.models.Review;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -17,6 +18,7 @@ public class ParseApplication extends Application {
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
         ParseObject.registerSubclass(Preferences.class);
         ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(Review.class);
 
         // Use for monitoring Parse OkHttp traffic
         // Can be Level.BASIC, Level.HEADERS, or Level.BODY
