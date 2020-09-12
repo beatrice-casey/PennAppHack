@@ -6,7 +6,6 @@
     android:layout_margin="8dp"
     tools:context=".settings.SettingsFragment">
 
-
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
@@ -19,95 +18,63 @@
         android:gravity="center"
         android:text="Logout" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Username" />
-
     <LinearLayout
-        android:id="@+id/selectionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:padding="16dp">
 
         <!-- Title, secondary and supporting text -->
+
         <TextView
-            android:id="@+id/tvAllergies"
+            android:id="@+id/tvSelectPreferences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your restrictions"
+            android:text="Reselect your Preferences"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <CheckBox
-            android:id="@+id/cbVegan"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/timeDrop"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Vegan"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:spinnerMode="dropdown"
+            android:background="@android:drawable/btn_dropdown"
+            tools:visibility="visible" />
 
-        <CheckBox
-            android:id="@+id/cbVegetarian"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/priceDrop"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Vegetarian"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:spinnerMode="dropdown"
+            android:background="@android:drawable/btn_dropdown"
+            tools:visibility="visible" />
 
-        <CheckBox
-            android:id="@+id/cbGlutenFree"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/accessDrop"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Gluten Free"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
-
-        <CheckBox
-            android:id="@+id/cbLactoseFree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Lactose Free"
-            android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
-
-
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnUpdateAllergies"
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="173dp"
-                android:layout_height="56dp"
-
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="312dp"
-                android:text="Update Allergies" />
-
-        </LinearLayout>
+            android:spinnerMode="dropdown"
+            android:background="@android:drawable/btn_dropdown"
+            tools:visibility="visible" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSetPreferences"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="442dp"
+        android:text="Set Preferences" />
 </RelativeLayout>
