@@ -21,8 +21,8 @@ import java.util.List;
 public class PostsViewModel extends AndroidViewModel {
 
     public static final String TAG = "PostsVM";
-    private MutableLiveData<List<Post>> posts;
-    private List<Post> listPosts;
+    protected MutableLiveData<List<Post>> posts;
+    protected List<Post> listPosts;
     private int timePref;
     private int accessPref;
     private int pricePref;

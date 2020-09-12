@@ -26,7 +26,7 @@ import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
-    private Context context;
+    protected Context context;
     private List<Post> posts;
     private boolean isLiked;
     public static final String TAG = "Adapter";
@@ -60,8 +60,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView tvUsername;
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        protected TextView tvUsername;
         private ImageView ivImage;
         private TextView tvRecipeName;
         private TextView tvTimeText;
