@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 user.signUpInBackground(new SignUpCallback() {
                     public void done(ParseException e) {
                         if (e == null) {
-                            // Show new card to set allergies
+                            // Show new card to set preferences
                             selectPreferences();
                         } else {
                             // Sign up didn't succeed. Look at the ParseException

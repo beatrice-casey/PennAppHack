@@ -1,35 +1,18 @@
 package com.example.pennapphack;
 
+
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-@ParseClassName("Post")
-public class Post extends ParseObject {
-
-    public static final String KEY_RECIPE_NAME = "recipeName";
-    public static final String KEY_IMAGE = "image";
+@ParseClassName("Preferences")
+public class Preferences extends ParseObject {
     public static final String KEY_USER = "user";
-    public static final String KEY_CREATED = "createdAt";
     public static final String KEY_PRICE = "price";
     public static final String KEY_TIME = "time";
+    public static final String KEY_ACCESS = "accessibility";
 
-    public String getDescription() {
-        return getString(KEY_RECIPE_NAME);
-    }
-
-    public void setDescription(String description) {
-        put(KEY_RECIPE_NAME, description);
-    }
-
-    public ParseFile getImage() {
-        return getParseFile(KEY_IMAGE);
-    }
-
-    public void setImage(ParseFile parseFile) {
-        put(KEY_IMAGE, parseFile);
-    }
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
@@ -47,4 +30,7 @@ public class Post extends ParseObject {
 
     public void setTime(int time) {put(KEY_TIME, time);}
 
+    public int getAccess() {return getInt(KEY_ACCESS); }
+
+    public void setAccess(int access) { put(KEY_ACCESS, access); }
 }

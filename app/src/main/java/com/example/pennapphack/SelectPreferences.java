@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,9 +12,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class SelectPreferences extends AppCompatActivity {
-    String [] TIMELIST ={"30 minutes","60 minutes","90 minutes","120 minutes"};
+
+    public static final String TAG = "SelectPreferences";
+    String [] TIMELIST ={"30","60","90","120"};
     String [] PRICELIST ={"$","$$","$$$"};
     String [] ACCESSLIST ={"Dorm Room", "Full Kitchen"};
 
@@ -24,6 +30,9 @@ public class SelectPreferences extends AppCompatActivity {
     private Spinner accessSpin;
     private Button setPref;
     private TextView change;
+    private Spinner timeSpinner;
+    private Spinner priceSpinner;
+    private Spinner accessSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +56,56 @@ public class SelectPreferences extends AppCompatActivity {
 
         //time spinner
         ArrayAdapter<String> arrayAdapterTime= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, TIMELIST);
-        Spinner timeSpinner = (Spinner)timeSpin;
+        timeSpinner = (Spinner)timeSpin;
         timeSpinner.setAdapter(arrayAdapterTime);
 
         //price spinner
         ArrayAdapter<String> arrayAdapterPrice = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, PRICELIST);
-        Spinner priceSpinner = (Spinner)priceSpin;
+        priceSpinner = (Spinner)priceSpin;
         priceSpinner.setAdapter(arrayAdapterPrice);
 
         //access spinner
         ArrayAdapter<String> arrayAdapterAccess = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, ACCESSLIST);
-        Spinner accessSpinner = (Spinner)accessSpin;
+        accessSpinner = (Spinner)accessSpin;
         accessSpinner.setAdapter(arrayAdapterAccess);
+
+        setPref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                savePreferences();
+            }
+        });
+    }
+
+    private void savePreferences() {
+        Preferences preferences = new Preferences();
+
+        String timeString = timeSpinner.getSelectedItem().toString();
+        int time = Integer.parseInt(timeString);
+        preferences.setTime(time);
+
+        String priceString = priceSpinner.getSelectedItem().toString();
+        int price = priceString.length();
+        preferences.setPrice(price);
+
+        int access = accessSpinner.getSelectedItemPosition();
+        preferences.setAccess(access);
+
+        preferences.setUser(ParseUser.getCurrentUser());
+
+        preferences.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Error while saving", e);
+                }
+                goMainActivity();
+            }
+
+        });
+
+
+
     }
 
     private void goMainActivity() {
